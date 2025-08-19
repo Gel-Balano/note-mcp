@@ -6,8 +6,14 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "clean": "rm -rf node_modules",
+    "reinstall": "yarn clean && yarn install"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "yarn@4.0.2",
   "dependencies": {
     "@modelcontext/protocol": "^1.4.0",
     "cors": "^2.8.5",
