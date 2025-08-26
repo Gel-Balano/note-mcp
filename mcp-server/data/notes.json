@@ -124,5 +124,101 @@
         "name": "Grocery List"
       }
     ]
+  },
+  {
+    "id": "7f8e9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b",
+    "name": "Morning Run",
+    "raw": "Completed 45 minute morning run at 6:30 AM, 5km distance with average pace 5:30 min/km",
+    "summary": "Morning running session covering 5km in 45 minutes with consistent pacing, completed early morning for optimal energy and metabolism boost.",
+    "status": 3,
+    "soft_deleted": null,
+    "tags": [
+      ["fitness", 95],
+      ["workout", 90],
+      ["running", 85],
+      ["cardio", 80],
+      ["morning", 70],
+      ["endurance", 75]
+    ],
+    "links": [
+      {
+        "id": "a1b2c3d4-e5f6-4a5b-8c7d-9e0f1a2b3c4d",
+        "relationship": "related",
+        "name": "Weekly Running Log"
+      }
+    ],
+    "referenced_by": []
+  },
+  {
+    "id": "8g9f0a1b-2d3e-4f5a-6b7c-8d9e0f1a2b3c",
+    "name": "HIIT Session",
+    "raw": "High intensity interval training for 25 minutes: 5 min warm-up, 15 min intervals (30s sprint/30s rest), 5 min cool-down",
+    "summary": "High-intensity interval training session lasting 25 minutes total, featuring sprint intervals to maximize calorie burn and cardiovascular fitness.",
+    "status": 3,
+    "soft_deleted": null,
+    "tags": [
+      ["fitness", 95],
+      ["workout", 90],
+      ["HIIT", 85],
+      ["intensity", 80],
+      ["cardio", 75],
+      ["interval", 70]
+    ],
+    "links": [
+      {
+        "id": "b2c8d9e0-f1e2-4a3b-9c4d-5e6f7a8b9c0d",
+        "relationship": "related",
+        "name": "HIIT Progress Tracker"
+      }
+    ],
+    "referenced_by": []
+  },
+  {
+    "id": "9h0g1a2b-3e4f-5a6b-7c8d-9e0f1a2b3c4d",
+    "name": "Strength Training",
+    "raw": "Upper body strength training session for 50 minutes: bench press 4x10, pull-ups 3x8, shoulder press 3x12, bicep curls 3x15",
+    "summary": "Comprehensive upper body strength training session lasting 50 minutes, targeting chest, back, shoulders, and arms with progressive overload.",
+    "status": 2,
+    "soft_deleted": null,
+    "tags": [
+      ["fitness", 95],
+      ["workout", 90],
+      ["strength", 85],
+      ["upper_body", 80],
+      ["resistance", 75],
+      ["muscle", 70]
+    ],
+    "links": [
+      {
+        "id": "c3d9e0f1-a2b3-4c5d-6e7f-8a9b0c1d2e3f",
+        "relationship": "related",
+        "name": "Strength Training Log"
+      }
+    ],
+    "referenced_by": []
+  },
+  {
+    "id": "0i1h2a3b-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
+    "name": "Yoga Flow",
+    "raw": "Evening yoga flow session for 35 minutes focusing on flexibility and mindfulness, including sun salutations and hip openers",
+    "summary": "Evening yoga practice lasting 35 minutes, combining flexibility training with mindfulness meditation for stress relief and mobility improvement.",
+    "status": 1,
+    "soft_deleted": null,
+    "tags": [
+      ["fitness", 80],
+      ["workout", 75],
+      ["yoga", 90],
+      ["flexibility", 85],
+      ["mindfulness", 80],
+      ["evening", 70]
+    ],
+    "links": [
+      {
+        "id": "d4e0f1a2-b3c4-4d5e-6f7g-8a9b0c1d2e3f",
+        "relationship": "related",
+        "name": "Yoga Progress Tracker"
+      }
+    ],
+    "referenced_by": []
   }
 ]

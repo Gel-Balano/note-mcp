@@ -1,11 +1,23 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { allNotesResources } from './resources/index.js';
+import { calculateWorkoutHours } from './tools/index.js';
 import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config();
+// Load environment variables from .env file
+const envPath = path.resolve(process.cwd(), '.env');
+console.log(`Loading environment from: ${envPath}`);
+const envConfig = dotenv.config({ path: envPath });
 
-// Initialize MCP Server with capabilities
+if (envConfig.error) {
+  console.error('Error loading .env file:', envConfig.error);
+} else {
+  console.log('Environment variables loaded successfully');
+  console.log('OPENAI_API_KEY present:', !!process.env.OPENAI_API_KEY);
+}
+
+// Initialize MCP Server with basic capabilities
 const server = new McpServer({
   name: 'notes-mcp-server',
   version: '1.0.0',
@@ -23,6 +35,10 @@ const server = new McpServer({
     prompts: {}
   },
 });
+
+// Register the workout hours tool
+server.tool('calculate-workout-hours', calculateWorkoutHours.parameters, calculateWorkoutHours.handler);
+console.log('Registered tool: calculate-workout-hours');
 
 // Register all note resources
 allNotesResources.forEach(resource => {
@@ -52,6 +68,6 @@ console.log('Available resources:');
 console.log('  - GET notes://list-all - List all notes');
 console.log('  - GET notes://read/{id} - Get a single note by ID');
 console.log('  - GET notes://by-tag/{tag} - Get notes by tag');
-console.log('  - GET notes://by-tags?tags=tag1,tag2&matchAll=true - Get notes by multiple tags');
-
+console.log('Available tools:');
+console.log('  - calculate-workout-hours - Calculate total workout hours from exercise notes');
 export default server;

@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Helper function to read notes
-const readNotes = async () => {
+export const readNotes = async () => {
   const notesPath = join(__dirname, '../../data/notes.json');
   const data = await fs.readFile(notesPath, 'utf-8');
   return JSON.parse(data);
@@ -100,11 +100,11 @@ export const getNoteById = {
   }
 };
 
-export const getNotesByTag = {
+export const getNotesByTags = {
   name: 'notes-by-tag',
   template: new ResourceTemplate('notes://by-tag/{tag}', { list: undefined }),
   config: {
-    description: 'Get notes by tag',
+    description: 'Get notes by tag(s). Accept single tag or comma-separated multiple tags',
     title: 'Notes by Tag',
     mimeType: 'application/json',
   },
@@ -116,9 +116,17 @@ export const getNotesByTag = {
       
       const notes = await readNotes();
       
-      // Find all notes that have the specified tag
-      const matchingNotes = notes.filter(note => 
-        note.tags && note.tags.some(([t]) => t.toLowerCase() === tag.toLowerCase())
+      // Handle multiple tags - split by comma if provided
+      // Decode URL encoding first, then split
+      const decodedTag = decodeURIComponent(tag);
+      const tags = decodedTag.split(',').map(t => t.trim().toLowerCase());
+      
+      // Find all notes that have any of the specified tags (OR logic)
+      const matchingNotes = notes.filter(note =>
+        note.tags && note.tags.some(tagArray => {
+          const tagName = Array.isArray(tagArray) ? tagArray[0] : tagArray;
+          return tags.includes(tagName.toLowerCase());
+        })
       );
       
       // Convert limit and offset to numbers with defaults
@@ -136,7 +144,7 @@ export const getNotesByTag = {
             meta: {
               total: matchingNotes.length,
               count: paginatedNotes.length,
-              tag,
+              tags: tags,
               limit: limit,
               offset: offset
             }
@@ -154,5 +162,5 @@ export const getNotesByTag = {
 export const allNotesResources = [
   listAllNotes,
   getNoteById,
-  getNotesByTag
+  getNotesByTags
 ];
