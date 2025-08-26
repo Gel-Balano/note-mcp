@@ -1,16 +1,31 @@
 import { OpenAI } from 'openai';
 import { readNotes } from '../resources/notes.js';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai = null;
+
+/**
+ * Gets the OpenAI client instance, initializing it if necessary
+ */
+function getOpenAIClient() {
+  if (!openai) {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      throw new Error('OPENAI_API_KEY environment variable is not set');
+    }
+    openai = new OpenAI({
+      apiKey: apiKey,
+    });
+  }
+  return openai;
+}
 
 /**
  * Extracts workout duration from a note using OpenAI
  */
 async function extractWorkoutDuration(noteText) {
   try {
-    const completion = await openai.chat.completions.create({
+    const client = getOpenAIClient();
+    const completion = await client.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         {
