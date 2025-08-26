@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "inspect": "set DANGEROUSLY_OMIT_AUTH=true && npx @modelcontextprotocol/inspector npm run dev",
     "clean": "rm -rf node_modules",
     "reinstall": "yarn clean && yarn install"
   },
@@ -14,9 +15,9 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@modelcontextprotocol/inspector": "^0.16.5",
     "@modelcontextprotocol/sdk": "^1.17.4",
-    "dotenv": "^16.0.3",
-    "zod": "^3.22.4"
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
