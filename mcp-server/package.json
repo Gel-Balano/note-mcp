@@ -2,12 +2,14 @@
   "name": "openai-mcp-server",
   "version": "1.0.0",
   "description": "MCP Server with OpenAI integration",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "inspect": "DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector -- yarn dev"
+    "start": "node dist/index.js",
+    "dev": "NODE_OPTIONS='--import tsx' node --no-warnings=ExperimentalWarning src/index.ts",
+    "build": "tsc",
+    "dev:nodemon": "nodemon --exec tsx src/index.ts",
+    "inspect": "DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector yarn dev"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -19,6 +21,10 @@
     "openai": "^5.15.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "nodemon": "^3.1.10",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   }
 }
